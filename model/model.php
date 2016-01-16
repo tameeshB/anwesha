@@ -227,8 +227,21 @@ class People{
         return $arr;
     }
 
-    public function getGroups($id, $conn){
-
+    public function getMyEvents($id, $conn){
+        $sql = "SELECT Events.eveName FROM Registration INNER JOIN Events ON Registration.eveId = Events.eveId AND Registration.pId = $id AND Registration.grpId is null";
+        $result = mysqli_query($conn, $sql);
+        $results = array();
+        while($row = mysqli_fetch_assoc($result)){
+            $results[] = array('eveName' => $row['eveName'], 'grpName' => null);
+        }
+        $sql = "SELECT Events.eveName, GroupRegistration.grpName FROM Registration INNER JOIN Events ON Registration.eveId = Events.eveId AND Registration.pId = $id INNER JOIN GroupRegistration ON Registration.grpId = GroupRegistration.grpId;";
+        $result = mysqli_query($conn, $sql);
+        if($result){
+            while($row = mysqli_fetch_assoc($result)){
+            $results[] = array('eveName' => $row['eveName'], 'grpName' => $row['grpName']);
+            }    
+        }
+        return $results;
     }
     /**
      * Registers a new user for anwesha
