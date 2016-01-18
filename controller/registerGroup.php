@@ -5,8 +5,18 @@ require('dbConnection.php');
 $conn = mysqli_connect(SERVER_ADDRESS,USER_NAME,PASSWORD,DATABASE);
 require('middleware/authMiddleware.php');
 $userID = $_SESSION['userID'];
-$json = file_get_contents('php://input');
-$POST = (array)json_decode($json);
+if(isset($_POST['IDs'])){
+	$POST = $_POST;
+	$POST['IDs'] = (array)json_decode($POST['IDs']);
+} else {
+	$json = file_get_contents('php://input');
+	$POST = (array)json_decode($json);	
+}
+// var_dump($POST);
+// var_dump($POST);
+// $t = is_array($POST['IDs']);
+// var_dump($t);
+// die();
 $userIDs;
 $name;
 if (isset($POST['IDs']) && !empty($POST['IDs']) && is_array($POST['IDs'])) {

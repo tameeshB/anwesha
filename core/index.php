@@ -46,6 +46,7 @@ while ($row = mysqli_fetch_assoc($result)) {
  ?>
 </tbody>
 </table>
-
+<br><br><br><br><br>
+<strong>Click <a href="unRegistered.php">Here</a> to view Unregistered People</strong>
 </body>
 </html>
