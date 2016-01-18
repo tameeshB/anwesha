@@ -51,6 +51,8 @@ if (preg_match($base . '$@', $url)) {
 	require ('controller/myEvents.php');
 } elseif (preg_match($base . 'changePassword/?$@', $url)) {
 	require ('controller/changePassword.php');
+} elseif (preg_match($base . 'notifications/([0-9]+)/?$@', $url,$match)) {
+	require ('controller/notifications.php');
 } elseif (preg_match($base . 'resendEmail/([0-9]{4})/?$@', $url, $match)) {
 	require ('controller/resendVerification.php');
 } elseif (preg_match($base . 'gallery.html@', $url)) {
